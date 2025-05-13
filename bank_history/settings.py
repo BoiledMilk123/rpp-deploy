@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import dj_database_url
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,6 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = 'django-insecure-0)$sf-jtk2i)1_7tt0-h1c^qlb2x72ge1%a73=f6%_r4qs3344'
 
+load_dotenv()
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -53,14 +55,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bank_history.wsgi.application'
 
+print(os.getenv("NAME"), os.getenv("HOST"), os.getenv("USER"))
 # Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bank-history-db',
-        'USER': 'postgresadmin',
-        'PASSWORD': 'postgres',
-        'HOST': 'bank-history-db-1-boiledmilk.db-msk0.amvera.tech',
+        'NAME': str(os.getenv("NAME")),
+        'USER': str(os.getenv("USER")),
+        'PASSWORD': str(os.getenv("PASSWORD")),
+        'HOST': str(os.getenv("HOST")),
+        'PORT': str(os.getenv("PORT")),
     }
 }
 
