@@ -57,7 +57,7 @@ WSGI_APPLICATION = 'bank_history.wsgi.application'
 
 print(os.getenv("NAME"), os.getenv("HOST"), os.getenv("USER"))
 # Database
-DATABASES = {
+DATABASES = { #переменные берутся из env файла; на гите тестовая, а на amveraa product db
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': str(os.getenv("NAME")),
