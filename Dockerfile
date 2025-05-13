@@ -1,21 +1,19 @@
- # Устанавливаем переменные окружения
+FROM python:3.11-slim
 
- FROM python:3.11-slim
- ENV PYTHONUNBUFFERED=1 \
-     PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
- # Создаём рабочую директорию
- WORKDIR /app
+WORKDIR /app
 
- # Устанавливаем зависимости для PostgreSQL
- RUN apt-get update -qq && apt-get install -y postgresql-client
+RUN apt-get update -qq && apt-get install -y postgresql-client
 
- # Копируем и устанавливаем зависимости
- COPY requirements.txt /app/
- RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
 
- # Копируем код приложения
- COPY . /app
+COPY . /app
 
- # Запускаем Gunicorn
- CMD ["gunicorn", "bank_history.wsgi:application", "--bind", "0.0.0.0:80"]
+# Собираем статику
+RUN python manage.py collectstatic --noinput
+
+# Запускаем Gunicorn
+CMD ["gunicorn", "bank_history.wsgi:application", "--bind", "0.0.0.0:80"]

@@ -25,7 +25,7 @@ app_name = 'bank_history'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('visits/', include('visits.urls', namespace='visits')),
+    path('', include('visits.urls', namespace='visits')),
 
 ]
 
