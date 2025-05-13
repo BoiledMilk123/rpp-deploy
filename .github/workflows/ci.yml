@@ -12,3 +12,4 @@ jobs:
       - name: Check deployment
         run: |
           curl -s -o /dev/null -w "%{http_code}" https://bank-history-prod.<username>.amvera.io/visits/ | grep 200
+
