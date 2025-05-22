@@ -35,7 +35,7 @@
     </ul>
     <br>
     {% if perms.visits.add_visit %}
-        <a href="{% url 'visits:visit_add' %}">Добавить посещение</a>
+        <a href="{% url 'visits:visit_add' visit.pk %}">Добавить посещение</a>
     {% endif %}
     <br><br>
     <table border="1" cellpadding="5">
